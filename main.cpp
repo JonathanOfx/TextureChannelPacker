@@ -1,25 +1,32 @@
+
+// STB image library implementation for loading and writing images.
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
+// OpenGL and texture handling includes and definitions.
 #ifndef GL_CLAMP_TO_EDGE
 #define GL_CLAMP_TO_EDGE 0x812F
 #endif
 
+// ImGui and OpenGL includes for the user interface and rendering.
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
+// GLFW include for window and context management.
 #include <GLFW/glfw3.h>
 
+// Windows-specific includes for file dialogs and shell operations.
 #ifdef _WIN32
 #include <shobjidl.h>
 #include <shellapi.h>
 #endif
 
+// Standard library includes for math, filesystem operations, I/O, strings, algorithms, and dynamic arrays.
 #include <cmath>
 #include <filesystem>
 #include <iostream>
@@ -27,6 +34,7 @@
 #include <algorithm>
 #include <vector>
 
+// Alias for the filesystem namespace to simplify path handling.
 namespace fs = std::filesystem;
 
 // Enumerates the four color channels that can be moved from source image data into the packed preview.
@@ -891,11 +899,22 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(1285, 815, "Texture Channel Packer", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(1285, 815, "Texture Channel Packer v" APP_VERSION, nullptr, nullptr);
     if (!window)
     {
         glfwTerminate();
         return 1;
+    }
+
+    {
+        int iconWidth = 0, iconHeight = 0, iconChannels = 0;
+        unsigned char* iconPixels = stbi_load("TexturePackerIcon.png", &iconWidth, &iconHeight, &iconChannels, 4);
+        if (iconPixels)
+        {
+            GLFWimage icon{ iconWidth, iconHeight, iconPixels };
+            glfwSetWindowIcon(window, 1, &icon);
+            stbi_image_free(iconPixels);
+        }
     }
 
     glfwMakeContextCurrent(window);

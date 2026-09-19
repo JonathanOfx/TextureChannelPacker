@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(TextureChannelPacker LANGUAGES CXX)
+project(TextureChannelPacker LANGUAGES CXX RC VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -29,8 +29,9 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(imgui)
 
-add_executable(TextureChannelPacker
+add_executable(TextureChannelPacker WIN32
     main.cpp
+    app.rc
     ${imgui_SOURCE_DIR}/imgui.cpp
     ${imgui_SOURCE_DIR}/imgui_draw.cpp
     ${imgui_SOURCE_DIR}/imgui_tables.cpp
@@ -51,3 +52,8 @@ target_link_libraries(TextureChannelPacker PRIVATE
     OpenGL::GL
     shell32
 )
+
+target_compile_definitions(TextureChannelPacker PRIVATE APP_VERSION="${PROJECT_VERSION}")
+
+# Statically link the MinGW runtime so the exe has no external DLL dependencies.
+target_link_options(TextureChannelPacker PRIVATE -static-libgcc -static-libstdc++ -static)
