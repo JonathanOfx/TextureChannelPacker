@@ -711,7 +711,7 @@ static void DrawTextureList(AppState& app)
         ExportPackedTextureToDialog(app);
     }
     ImGui::SameLine(0.0f, 8.0f);
-    DrawHelpMarker("http://www.jon-fx.com");
+    DrawHelpMarker("https://github.com/JonathanOfx/TextureChannelPacker");
 
     ImGui::Dummy(ImVec2(0.0f, 2.0f));
     ImGui::Separator();
