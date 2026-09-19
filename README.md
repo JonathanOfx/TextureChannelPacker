@@ -1,6 +1,14 @@
 # Texture Channel Packer
 
-A small Windows desktop tool for packing image channels into a single RGBA texture. Import up to four images, choose a source channel for each image, assign it to a target channel, preview the result, and export PNG or TGA.
+A small windows app to shuffle and pack RGBA channels of up to 4 textures into a single texture.
+
+<img width="1279" height="847" alt="ChannelPackerTool_V01" src="https://github.com/user-attachments/assets/eddab6f3-b777-423f-a9f7-48530e678bcd" />
+
+## Supported formats
+
+- Import: formats supported by stb_image
+- Export: PNG and TGA
+
 
 ## Requirements
 
@@ -34,11 +42,6 @@ Run the executable from the corresponding build directory:
 ```
 
 You can also use the included VS Code tasks after configuring CMake Tools with a MinGW toolchain on `PATH`.
-
-## Supported formats
-
-- Import: formats supported by stb_image
-- Export: PNG and TGA
 
 ## Dependencies and licenses
 
